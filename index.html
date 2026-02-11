@@ -54,7 +54,6 @@
   <button id="toggleBtn" onclick="toggleRemaining()">Show Remaining Only</button>
   <button onclick="undoMove()">Undo</button>
   <button onclick="resetGame()">Reset</button>
-  <button onclick="showRules()">Dehla Pakad Rules</button>
 </div>
 
 <h2 class="section-title">Deck</h2>
@@ -87,20 +86,6 @@
     <h3>Select Player</h3>
     <div id="modalContent"></div>
     <button onclick="hidePlayerModal()">Cancel</button>
-  </div>
-</div>
-
-<div id="rulesModal" class="modal-overlay" onclick="outsideRulesClick(event)">
-  <div class="modal-box" style="max-height:80vh;overflow:auto;">
-    <h3>Dehla Pakad Rules</h3>
-    <pre style="white-space:pre-wrap;font-size:13px;line-height:1.4;">
-Dehla Pakad Rules – Use standard 52-card deck.
-Highest card wins trick unless trump played.
-10 cards (Dehla) are scoring cards.
-Team with majority 10s wins hand.
-Taking all 4 tens = 1 Kot.
-    </pre>
-    <button onclick="hideRules()">Close</button>
   </div>
 </div>
 
