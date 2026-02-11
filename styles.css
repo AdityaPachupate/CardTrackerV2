@@ -123,12 +123,70 @@
     margin:15px 0 10px;
   }
   
-  .panel-texture{
-    background-color:#7c0e0e;
-    border:1px solid rgba(255,255,255,0.2);
-    padding:8px;
-    border-radius:var(--radius);
-  }
+.panel-texture{
+  background-color:#7c0e0e;
+  border:1px solid rgba(255,255,255,0.2);
+  padding:8px;
+  border-radius:var(--radius);
+}
+
+.scoreboard-wrap{
+  margin:10px auto 0;
+  max-width:460px;
+}
+
+.scoreboard-panel{
+  padding:10px;
+}
+
+.scoreboard-title{
+  font-weight:700;
+  margin-bottom:8px;
+  letter-spacing:0.2px;
+  text-transform:uppercase;
+  font-size:13px;
+  opacity:0.9;
+}
+
+.scoreboard-table{
+  width:100%;
+  border-collapse:separate;
+  border-spacing:0;
+  font-size:14px;
+  background:rgba(255,255,255,0.08);
+  border:1px solid rgba(255,255,255,0.2);
+  border-radius:8px;
+  overflow:hidden;
+}
+
+.scoreboard-head-row{
+  background:rgba(0,0,0,0.2);
+}
+
+.scoreboard-head{
+  padding:8px 10px;
+  text-align:center;
+  font-weight:700;
+  border-bottom:1px solid rgba(255,255,255,0.2);
+}
+
+.scoreboard-cell{
+  padding:8px 10px;
+  text-align:center;
+  border-bottom:1px solid rgba(255,255,255,0.15);
+}
+
+.scoreboard-team{
+  text-align:left;
+}
+
+.scoreboard-row:last-child .scoreboard-cell{
+  border-bottom:none;
+}
+
+.scoreboard-row:nth-child(even){
+  background:rgba(255,255,255,0.05);
+}
   
   /* ===== Teams Layout ===== */
   
@@ -204,13 +262,26 @@
     text-align:center;
   }
   
-  .start-box h3{
-    font-size:22px;
-    margin-top:0;
-    margin-bottom:10px;
-  }
+.start-box h3{
+  font-size:22px;
+  margin-top:0;
+  margin-bottom:10px;
+}
+
+#modalContent .modal-player-btn:disabled,
+#modalContent .modal-player-btn.played{
+  background:#8a8a8a;
+  color:#f5f5f5;
+  cursor:not-allowed;
+  opacity:0.8;
+}
+
+#modalContent .modal-player-btn:disabled:hover,
+#modalContent .modal-player-btn.played:hover{
+  background:#8a8a8a;
+}
   
-  /* ===== Responsive Tweaks ===== */
+/* ===== Responsive Tweaks ===== */
   
   @media (max-width: 768px){
     body{
@@ -253,6 +324,19 @@
   
     .player-cards{
       gap:2px;
+    }
+
+    .scoreboard-wrap{
+      max-width:100%;
+    }
+
+    .scoreboard-table{
+      font-size:13px;
+    }
+
+    .scoreboard-head,
+    .scoreboard-cell{
+      padding:7px 8px;
     }
   }
   

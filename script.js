@@ -232,15 +232,31 @@ state.pendingCard=cardId;
 showPlayerModal();
 }
 
+function getCurrentTrickPlayerIds(){
+const h=state.history;
+const remaining=h.length%4;
+if(remaining===0) return new Set();
+const start=h.length-remaining;
+return new Set(h.slice(start).map(e=>e.pid));
+}
+
 function showPlayerModal(){
 const modal=document.getElementById("playerModal");
 const content=document.getElementById("modalContent");
+const usedPlayers=getCurrentTrickPlayerIds();
 content.innerHTML="";
 for(const tid of state.teamOrder){
 for(const pid of state.teams[tid].playerIds){
 const btn=document.createElement("button");
+btn.className="modal-player-btn";
 btn.textContent=state.players[pid].name;
+if(usedPlayers.has(pid)){
+btn.disabled=true;
+btn.classList.add("played");
+btn.title="Already played in this trick";
+}else{
 btn.onclick=()=>assignCard(pid);
+}
 content.appendChild(btn);
 }
 }
@@ -256,16 +272,10 @@ if(e.target.id==="playerModal") hidePlayerModal();
 }
 
 function assignCard(pid){
-const h=state.history;
-const remaining=h.length%4;
-if(remaining>0){
-const start=h.length-remaining;
-const trickEntries=h.slice(start);
-const alreadyPlayed=trickEntries.some(e=>e.pid===pid);
-if(alreadyPlayed){
+const usedPlayers=getCurrentTrickPlayerIds();
+if(usedPlayers.has(pid)){
 alert("This player has already played in this trick.");
 return;
-}
 }
 const card=state.pendingCard;
 if(!card) return;
@@ -299,21 +309,21 @@ if(scoreWrap){
     const team=state.teams[tid];
     const tricks=info.teamTricks[tid]||0;
     const tens=info.teamTens[tid]||0;
-    return `<tr>
-      <td style="text-align:left;padding:6px 10px;">${team.name}</td>
-      <td style="padding:6px 10px;">${tricks}</td>
-      <td style="padding:6px 10px;">${tens}</td>
+    return `<tr class="scoreboard-row">
+      <td class="scoreboard-cell scoreboard-team">${team.name}</td>
+      <td class="scoreboard-cell">${tricks}</td>
+      <td class="scoreboard-cell">${tens}</td>
     </tr>`;
   }).join("");
   scoreWrap.innerHTML=`
-    <div class="panel-texture" style="padding:8px;">
-      <div style="font-weight:bold;margin-bottom:6px;">Scoreboard</div>
-      <table style="width:100%;border-collapse:collapse;font-size:14px;">
+    <div class="panel-texture scoreboard-panel">
+      <div class="scoreboard-title">Scoreboard</div>
+      <table class="scoreboard-table">
         <thead>
-          <tr style="opacity:0.9;">
-            <th style="text-align:left;padding:6px 10px;">Team</th>
-            <th style="padding:6px 10px;">Tricks</th>
-            <th style="padding:6px 10px;">10s (captured)</th>
+          <tr class="scoreboard-head-row">
+            <th class="scoreboard-head scoreboard-team">Team</th>
+            <th class="scoreboard-head">Tricks</th>
+            <th class="scoreboard-head">10s (captured)</th>
           </tr>
         </thead>
         <tbody>${rows}</tbody>
