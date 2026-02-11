@@ -1,0 +1,280 @@
+:root{
+    --table-green:#006400;
+    --poker-red:#c21807;
+    --poker-red-dark:#911205;
+    --panel-soft:rgba(255,255,255,0.08);
+    --radius:10px;
+    --radius-sm:6px;
+    --glow:0 0 10px gold;
+  }
+  
+  *{
+    box-sizing:border-box;
+  }
+  
+  body{
+    font-family:Arial, sans-serif;
+    background:var(--table-green);
+    margin:0;
+    padding:14px;
+    color:white;
+    max-width:100vw;
+    overflow-x:hidden;
+  }
+  
+  h1{
+    text-align:center;
+    margin-bottom:10px;
+  }
+  
+  button{
+    padding:8px 14px;
+    border-radius:var(--radius-sm);
+    border:none;
+    background:var(--poker-red);
+    color:#fff;
+    cursor:pointer;
+    margin:4px;
+    font-weight:bold;
+    transition:0.2s;
+  }
+  
+  button:hover{
+    background:var(--poker-red-dark);
+  }
+  
+  /* ===== Poker Round Backer ===== */
+  
+  .deck-wrapper{
+    background:radial-gradient(circle at center,#b71c1c 0%,#7c0e0e 70%);
+    border-radius:50px;
+    padding:20px;
+    margin-bottom:20px;
+  }
+  
+  .deck-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(48px,1fr));
+    gap:5px;
+  }
+  
+  @media (min-width: 1024px){
+    .deck-grid{
+      grid-template-columns:repeat(13,1fr);
+    }
+    .card.placeholder{
+      display:block;
+      visibility:hidden;
+      border:none;
+      background:transparent;
+      box-shadow:none;
+    }
+  }
+  
+  /* ===== Cards ===== */
+  
+  .card{
+    border:1px solid #333;
+    border-radius:var(--radius-sm);
+    padding:5px;
+    background:white;
+    text-align:center;
+    font-weight:bold;
+    cursor:pointer;
+    color:black;
+    transition:0.2s;
+  }
+  
+  .card:hover{
+    transform:scale(1.05);
+  }
+  
+  .symbol{
+    font-size:1em;
+  }
+  
+  .red{
+    color:red;
+  }
+  
+  .black{
+    color:black;
+  }
+  
+  .used{
+    background:#ccc;
+    text-decoration:line-through;
+    cursor:not-allowed;
+  }
+  
+  .dehla{
+    box-shadow:var(--glow);
+    border:2px solid gold;
+  }
+  
+  .card.placeholder{
+    display:none;
+  }
+  
+  /* ===== Sections ===== */
+  
+  .section-title{
+    text-align:center;
+    margin:15px 0 10px;
+  }
+  
+  .panel-texture{
+    background-color:#7c0e0e;
+    border:1px solid rgba(255,255,255,0.2);
+    padding:8px;
+    border-radius:var(--radius);
+  }
+  
+  /* ===== Teams Layout ===== */
+  
+  .teams{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    justify-content:center;
+    max-width:900px;
+    margin:0 auto;
+  }
+  
+  .team{
+    flex:1 1 320px;
+    min-width:260px;
+    max-width:380px;
+  }
+  
+  .player{
+    background:var(--panel-soft);
+    padding:8px;
+    border-radius:var(--radius-sm);
+    margin-bottom:4px;
+  }
+  
+  .player-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+  }
+  
+  .player-cards{
+    display:flex;
+    flex-wrap:wrap;
+    gap:4px;
+    margin-top:6px;
+  }
+  
+  .chip-badge{
+    width:30px;
+    height:30px;
+    border-radius:50%;
+    background:white;
+    color:black;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:bold;
+  }
+  
+  /* ===== Modals ===== */
+  
+  .modal-overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.65);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    z-index:10;
+  }
+  
+  .modal-box{
+    background:#7c0e0e;
+    padding:20px;
+    border-radius:10px;
+    width:90%;
+    max-width:400px;
+  }
+  
+  .start-box{
+    max-width:360px;
+    text-align:center;
+  }
+  
+  .start-box h3{
+    font-size:22px;
+    margin-top:0;
+    margin-bottom:10px;
+  }
+  
+  /* ===== Responsive Tweaks ===== */
+  
+  @media (max-width: 768px){
+    body{
+      padding:8px;
+      font-size:14px;
+    }
+  
+    h1{
+      font-size:20px;
+      margin-bottom:6px;
+    }
+  
+    .deck-wrapper{
+      padding:12px;
+      border-radius:30px;
+    }
+  
+    .card{
+      padding:4px;
+      font-size:12px;
+    }
+  
+    .section-title{
+      margin:10px 0 6px;
+      font-size:16px;
+    }
+  
+    .teams{
+      flex-direction:column;
+      max-width:480px;
+    }
+  
+    .team{
+      max-width:100%;
+    }
+  
+    .player{
+      font-size:13px;
+    }
+  
+    .player-cards{
+      gap:2px;
+    }
+  }
+  
+  @media (max-width: 480px){
+    #toggleBtn,
+    button[onclick="undoMove()"],
+    button[onclick="resetGame()"]{
+      display:inline-block;
+      width:auto;
+      margin:4px 6px;
+      white-space:nowrap;
+    }
+  
+    .modal-box{
+      width:95%;
+      padding:14px;
+    }
+  
+    #modalContent button{
+      display:block;
+      width:100%;
+      margin:4px 0;
+    }
+  }
+  

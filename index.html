@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Card Tracker - Teams & Players</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<h1>Card Tracker</h1>
+
+<div id="startScreen" class="modal-overlay" style="display:flex;z-index:20;">
+  <div class="modal-box start-box">
+    <h3>Start Game</h3>
+    <div style="margin-bottom:12px;font-size:16px;">
+      Choose trump and set player names.
+    </div>
+
+    <div style="margin-bottom:12px;">
+      <label style="font-size:16px;font-weight:bold;">
+        Trump:
+        <select id="startTrump" style="margin-left:6px;">
+          <option value="">Select trump</option>
+          <option value="Spades">Spades ♠</option>
+          <option value="Hearts">Hearts ♥</option>
+          <option value="Diamonds">Diamonds ♦</option>
+          <option value="Clubs">Clubs ♣</option>
+        </select>
+      </label>
+    </div>
+
+    <div style="margin-bottom:12px;text-align:left;font-size:14px;">
+      <div style="margin-bottom:4px;font-weight:bold;text-align:center;">Player names</div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:space-between;">
+        <div style="flex:1 1 120px;">
+          <div style="font-weight:bold;margin-bottom:2px;">Team 1</div>
+          <input id="startP1" type="text" placeholder="Player 1" style="width:100%;margin-bottom:4px;">
+          <input id="startP2" type="text" placeholder="Player 2" style="width:100%;margin-bottom:4px;">
+        </div>
+        <div style="flex:1 1 120px;">
+          <div style="font-weight:bold;margin-bottom:2px;">Team 2</div>
+          <input id="startP3" type="text" placeholder="Player 3" style="width:100%;margin-bottom:4px;">
+          <input id="startP4" type="text" placeholder="Player 4" style="width:100%;margin-bottom:4px;">
+        </div>
+      </div>
+    </div>
+
+    <button onclick="startGame()">Start Game</button>
+  </div>
+</div>
+
+<div style="text-align:center;">
+  <button id="toggleBtn" onclick="toggleRemaining()">Show Remaining Only</button>
+  <button onclick="undoMove()">Undo</button>
+  <button onclick="resetGame()">Reset</button>
+  <button onclick="showRules()">Dehla Pakad Rules</button>
+</div>
+
+<h2 class="section-title">Deck</h2>
+<div class="deck-wrapper">
+  <div class="deck-grid" id="deckGrid"></div>
+</div>
+
+<h2 class="section-title">Tricks</h2>
+<div style="text-align:center;font-size:18px;">
+  Total Tricks: <span id="trickCount">0</span>
+  <div style="margin-top:8px;">
+    Trump:
+    <select id="trumpSelect" onchange="setTrumpSuit(this.value)">
+      <option value="">No Trump</option>
+      <option value="Spades">Spades ♠</option>
+      <option value="Hearts">Hearts ♥</option>
+      <option value="Diamonds">Diamonds ♦</option>
+      <option value="Clubs">Clubs ♣</option>
+    </select>
+  </div>
+  <div id="scoreBoard" style="margin:10px auto 0;max-width:420px;"></div>
+  <div id="currentTrickInfo" style="margin-top:8px;font-size:14px;"></div>
+</div>
+
+<h2 class="section-title">Teams</h2>
+<div class="teams" id="teams"></div>
+
+<div id="playerModal" class="modal-overlay" onclick="outsideClick(event)">
+  <div class="modal-box">
+    <h3>Select Player</h3>
+    <div id="modalContent"></div>
+    <button onclick="hidePlayerModal()">Cancel</button>
+  </div>
+</div>
+
+<div id="rulesModal" class="modal-overlay" onclick="outsideRulesClick(event)">
+  <div class="modal-box" style="max-height:80vh;overflow:auto;">
+    <h3>Dehla Pakad Rules</h3>
+    <pre style="white-space:pre-wrap;font-size:13px;line-height:1.4;">
+Dehla Pakad Rules – Use standard 52-card deck.
+Highest card wins trick unless trump played.
+10 cards (Dehla) are scoring cards.
+Team with majority 10s wins hand.
+Taking all 4 tens = 1 Kot.
+    </pre>
+    <button onclick="hideRules()">Close</button>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
